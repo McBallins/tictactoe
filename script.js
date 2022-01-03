@@ -1,6 +1,17 @@
 const Gameboard = {
   positions: [],
 
+  position: (function() {
+    const positions = document.querySelectorAll('.column');
+    console.log(positions);
+    positions.forEach(position => {
+      position.addEventListener('click', event => {
+        console.log('player.choice', position.dataset.location);
+        this.placeInPosition('player.choice', position.dataset.location);
+      })
+    })
+  })(),
+
   placeInPosition: function(player, location) {
     if(this.positions[location] === undefined) {
     this.positions[location] = player;
@@ -22,7 +33,7 @@ const Gameboard = {
   // if the board is full and there is not a row of xs or os, tie
   // const check = console.log('gameboard accesible');
   // return 'check';
-};
+}
 
 const Game = {
   checkEndofGame: function () {
