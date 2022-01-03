@@ -1,7 +1,5 @@
 const Gameboard = (() => {
-  const positions = [
-    ,
-  ]
+  const positions = []
 
   const postionPiece = (() => {
     const positions = document.querySelectorAll('.column');
