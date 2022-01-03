@@ -1,20 +1,21 @@
 const Gameboard = {
-  positions: [],
+  positions: [
+    ,
+  ],
 
   position: (function() {
     const positions = document.querySelectorAll('.column');
-    console.log(positions);
     positions.forEach(position => {
       position.addEventListener('click', event => {
         console.log('player.choice', position.dataset.location);
-        this.placeInPosition('player.choice', position.dataset.location);
+        Gameboard.placeInPosition('player.choice', position.dataset.location);
       })
     })
   })(),
 
-  placeInPosition: function(player, location) {
-    if(this.positions[location] === undefined) {
-    this.positions[location] = player;
+  placeInPosition: function() {
+    if(Gameboard.positions[location] === undefined) {
+    Gameboard.positions[location] = player;
     console.log(player + ' has been placed on ' + location);
     const placement = document.querySelector(`[data-location=’${location}’]`);
     placement.textContent = player;
