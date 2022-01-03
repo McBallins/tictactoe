@@ -89,11 +89,17 @@ input, select {
     vertical-align:middle;
 }
 
+#master {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    height: 96vh;
+}
+
 #gameboard {
     height: 96vh;
     width: 96vh;
     margin: auto;
-    margin-top: 2vh;
     display: flex;
     box-sizing: border-box;
     border: 1px solid black;
@@ -115,4 +121,13 @@ input, select {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#infoboard {
+    box-sizing: border-box;
+    height: 96vh;
+    border: 1px solid black;
+    width: 48vh;
+    flex-basis: 1;
+    margin-right: 8vh;
 }
