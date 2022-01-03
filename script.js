@@ -136,11 +136,7 @@ const InfoBoard = (() => {
       infoBoard.appendChild(newForm);
       i += 1;
     }));
-  });
-
-  return {
-    makeForms: makeForms,
-  }
+  })();
   // forms to take in player names and x or o selection
     // player selects player v player or player v ai
   // write events that happen in the game
