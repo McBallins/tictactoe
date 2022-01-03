@@ -51,8 +51,7 @@ const Game = (() => {
 });
 
 const players = (() => {
-  const Player = (turnAvailable, choice) => {
-    let turnAvailable = turnAvailable;
+  const Player = (choice) => {
     let choice = choice;
   }
 
