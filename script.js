@@ -19,3 +19,30 @@ const Gameboard = {
   // const check = console.log('gameboard accesible');
   // return 'check';
 };
+
+const Game = {
+  checkEndofGame: function () {
+    if(humanPlayer.choice === positions[0] && humanPlayer.choice === positions[1] && humanPlayer.choice === positions[2] || 
+      humanPlayer.choice === positions[0] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[8] || 
+      humanPlayer.choice === positions[0] && humanPlayer.choice === positions[3] && humanPlayer.choice === positions[6] || 
+      humanPlayer.choice === positions[1] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[7] || 
+      humanPlayer.choice === positions[2] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[6] || 
+      humanPlayer.choice === positions[2] && humanPlayer.choice === positions[5] && humanPlayer.choice === positions[8] || 
+      humanPlayer.choice === positions[3] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[5] || 
+      humanPlayer.choice === positions[6] && humanPlayer.choice === positions[7] && humanPlayer.choice === positions[8]) {
+      console.log('you win');
+    }
+    else if(Gameboard.positions.length === 9) {
+      console.log('you tied');
+    } else if(player.choice === positions[0] && player.choice === positions[1] && player.choice === positions[2] || 
+      ai.choice === positions[0] && ai.choice === positions[4] && ai.choice === positions[8] || 
+      ai.choice === positions[0] && ai.choice === positions[3] && ai.choice === positions[6] || 
+      ai.choice === positions[1] && ai.choice === positions[4] && ai.choice === positions[7] || 
+      ai.choice === positions[2] && ai.choice === positions[4] && ai.choice === positions[6] || 
+      ai.choice === positions[2] && ai.choice === positions[5] && ai.choice === positions[8] || 
+      ai.choice === positions[3] && ai.choice === positions[4] && ai.choice === positions[5] || 
+      ai.choice === positions[6] && ai.choice === positions[7] && ai.choice === positions[8]) {
+      console.log('you lose');
+    }
+  }
+}
