@@ -2,10 +2,14 @@ const Gameboard = {
   positions: [],
 
   placeInPosition: function(player, location) {
+    if(this.positions[location] === undefined) {
     this.positions[location] = player;
     console.log(player + ' has been placed on ' + location);
     const placement = document.querySelector(`[data-location=’${location}’]`);
     placement.textContent = player;
+    } else {
+      console.log(`There is a ${this.positions[location]} already there!` );
+    }
   },
   // we have 9 lactations
   // each position has three possible states- x, o, null
