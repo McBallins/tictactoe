@@ -5,8 +5,8 @@ const Gameboard = (() => {
     const positions = document.querySelectorAll('.column');
     positions.forEach(position => {
       position.addEventListener('click', event => {
-        console.log('player.choice', position.dataset.location);
-        placeInPosition('player.choice', position.dataset.location);
+        console.log(player.choice, position.dataset.location);
+        placeInPosition(player.choice, position.dataset.location);
       })
     })
   })();
@@ -56,6 +56,15 @@ const players = (() => {
     let choice = choice;
   }
 
-  let playerOne = Player(true, 'x');
-  let playerTwo = Player(false, 'o');
+  let currentPlayer = 'playerOne';
+  const playerOne = Player('x');
+  const playerTwo = Player('o');
+
+  const switchTurns = () => {
+    if(currentPlayer === 'playerOne') {
+      currentPlayer = 'playerTwo'
+    } else {
+      currentPlayer = 'playerOne'
+    }
+  }
 })();
