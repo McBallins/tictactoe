@@ -23,29 +23,40 @@ const Gameboard = (() => {
   }
 })();
 
-const Game = {
-  checkEndofGame: function () {
-    if(humanPlayer.choice === positions[0] && humanPlayer.choice === positions[1] && humanPlayer.choice === positions[2] || 
-      humanPlayer.choice === positions[0] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[8] || 
-      humanPlayer.choice === positions[0] && humanPlayer.choice === positions[3] && humanPlayer.choice === positions[6] || 
-      humanPlayer.choice === positions[1] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[7] || 
-      humanPlayer.choice === positions[2] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[6] || 
-      humanPlayer.choice === positions[2] && humanPlayer.choice === positions[5] && humanPlayer.choice === positions[8] || 
-      humanPlayer.choice === positions[3] && humanPlayer.choice === positions[4] && humanPlayer.choice === positions[5] || 
-      humanPlayer.choice === positions[6] && humanPlayer.choice === positions[7] && humanPlayer.choice === positions[8]) {
+const Game = (() => {
+  checkEndofGame = function() {
+    if(playerOne.choice === positions[0] && playerOne.choice === positions[1] && playerOne.choice === positions[2] || 
+      playerOne.choice === positions[0] && playerOne.choice === positions[4] && playerOne.choice === positions[8] || 
+      playerOne.choice === positions[0] && playerOne.choice === positions[3] && playerOne.choice === positions[6] || 
+      playerOne.choice === positions[1] && playerOne.choice === positions[4] && playerOne.choice === positions[7] || 
+      playerOne.choice === positions[2] && playerOne.choice === positions[4] && playerOne.choice === positions[6] || 
+      playerOne.choice === positions[2] && playerOne.choice === positions[5] && playerOne.choice === positions[8] || 
+      playerOne.choice === positions[3] && playerOne.choice === positions[4] && playerOne.choice === positions[5] || 
+      playerOne.choice === positions[6] && playerOne.choice === positions[7] && playerOne.choice === positions[8]) {
       console.log('you win');
     }
     else if(Gameboard.positions.length === 9) {
       console.log('you tied');
     } else if(player.choice === positions[0] && player.choice === positions[1] && player.choice === positions[2] || 
-      ai.choice === positions[0] && ai.choice === positions[4] && ai.choice === positions[8] || 
-      ai.choice === positions[0] && ai.choice === positions[3] && ai.choice === positions[6] || 
-      ai.choice === positions[1] && ai.choice === positions[4] && ai.choice === positions[7] || 
-      ai.choice === positions[2] && ai.choice === positions[4] && ai.choice === positions[6] || 
-      ai.choice === positions[2] && ai.choice === positions[5] && ai.choice === positions[8] || 
-      ai.choice === positions[3] && ai.choice === positions[4] && ai.choice === positions[5] || 
-      ai.choice === positions[6] && ai.choice === positions[7] && ai.choice === positions[8]) {
+      playerTwo.choice === positions[0] && playerTwo.choice === positions[4] && playerTwo.choice === positions[8] || 
+      playerTwo.choice === positions[0] && playerTwo.choice === positions[3] && playerTwo.choice === positions[6] || 
+      playerTwo.choice === positions[1] && playerTwo.choice === positions[4] && playerTwo.choice === positions[7] || 
+      playerTwo.choice === positions[2] && playerTwo.choice === positions[4] && playerTwo.choice === positions[6] || 
+      playerTwo.choice === positions[2] && playerTwo.choice === positions[5] && playerTwo.choice === positions[8] || 
+      playerTwo.choice === positions[3] && playerTwo.choice === positions[4] && playerTwo.choice === positions[5] || 
+      playerTwo.choice === positions[6] && playerTwo.choice === positions[7] && playerTwo.choice === positions[8]) {
       console.log('you lose');
     }
   }
-}
+});
+
+const players = (() => {
+  const Player = (turnAvailable, choice) => {
+    let turnAvailable = turnAvailable;
+    let choice = choice;
+  }
+
+  const playerOne = Player(true, 'x');
+
+  const playerTwo = Player(false, 'o');
+})();
