@@ -108,6 +108,39 @@ const Players = (function() {
 })();
 
 const InfoBoard = (() => {
+  const infoBoard = document.getElementById('infoboard');
+
+  const makeForms = (() => {
+    const myForms = [
+      ['TEXT', 'playerOneName', 'INPUT'],
+      ['TEXT', 'playerTwoName', 'INPUT'],
+      ['', '', 'P', 'Which Player is Going first?'],
+      ['RADIO', 'radioPlayerOne', 'INPUT', 'Palyer One'],
+      ['RADIO', 'radioPlayerOne', 'INPUT', 'Player Two'],
+    ]
+    let i = 0;
+    myForms.forEach((form => {
+      const newForm = document.createElement(myForms[i][2]);
+      console.log(myForms[i]);
+      newForm.classList = 'form';
+      newForm.type = myForms[i][0];
+      newForm.id = myForms[i][1];
+      newForm.name = myForms[i][1];
+      newForm.textContent = myForms[i][3];
+      if(myForms[i][0] === 'RADIO') {
+        console.log('works')
+        const label = document.createElement('LABEL');
+        label.textContent = myForms[i][3];
+        infoBoard.appendChild(label);
+      }
+      infoBoard.appendChild(newForm);
+      i += 1;
+    }));
+  });
+
+  return {
+    makeForms: makeForms,
+  }
   // forms to take in player names and x or o selection
     // player selects player v player or player v ai
   // write events that happen in the game
@@ -118,5 +151,5 @@ const InfoBoard = (() => {
 })();
 
 const aiPlayer = (() => {
-  
+
 })();
