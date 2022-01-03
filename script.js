@@ -26,6 +26,7 @@ const Gameboard = (() => {
     console.log(choice + ' has been placed on ' + location);
     const position = document.querySelector(`[data-location="${location}"]`);
     position.textContent = choice;
+    Game.checkEndofGame();
     Game.switchTurn();
     } else {
       console.log(`There is a ${this.positions[location]} already there!` );
@@ -33,7 +34,8 @@ const Gameboard = (() => {
   };
 
   return {
-    placeInPosition: placeInPosition
+    placeInPosition: placeInPosition,
+    positions : positions
   };
 })();
 
@@ -53,26 +55,29 @@ const Game = (() => {
   }
 
     const checkEndofGame = () => {
-      if(playerOne.choice === positions[0] && playerOne.choice === positions[1] && playerOne.choice === positions[2] || 
-        playerOne.choice === positions[0] && playerOne.choice === positions[4] && playerOne.choice === positions[8] || 
-        playerOne.choice === positions[0] && playerOne.choice === positions[3] && playerOne.choice === positions[6] || 
-        playerOne.choice === positions[1] && playerOne.choice === positions[4] && playerOne.choice === positions[7] || 
-        playerOne.choice === positions[2] && playerOne.choice === positions[4] && playerOne.choice === positions[6] || 
-        playerOne.choice === positions[2] && playerOne.choice === positions[5] && playerOne.choice === positions[8] || 
-        playerOne.choice === positions[3] && playerOne.choice === positions[4] && playerOne.choice === positions[5] || 
-        playerOne.choice === positions[6] && playerOne.choice === positions[7] && playerOne.choice === positions[8]) {
+      console.log('checking end of game');
+      if(Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[1] && Players.playerOne.choice === Gameboard.positions[2] || 
+        Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[8] || 
+        Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[3] && Players.playerOne.choice === Gameboard.positions[6] || 
+        Players.playerOne.choice === Gameboard.positions[1] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[7] || 
+        Players.playerOne.choice === Gameboard.positions[2] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[6] || 
+        Players.playerOne.choice === Gameboard.positions[2] && Players.playerOne.choice === Gameboard.positions[5] && Players.playerOne.choice === Gameboard.positions[8] || 
+        Players.playerOne.choice === Gameboard.positions[3] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[5] || 
+        Players.playerOne.choice === Gameboard.positions[6] && Players.playerOne.choice === Gameboard.positions[7] && Players.playerOne.choice === Gameboard.positions[8]) {
         console.log('you win');
       }
-      else if(Gameboard.positions.length === 9) {
+      else if(Gameboard.positions[0] !== undefined && Gameboard.positions[1] !== undefined && Gameboard.positions[2] !== undefined && Gameboard.positions[3] !== undefined 
+        && Gameboard.positions[5] !== undefined && Gameboard.positions[6] !== undefined && Gameboard.positions[7] !== undefined && Gameboard.positions[8] !== undefined) {
+        console.log(Gameboard.positions.length)
         console.log('you tied');
-      } else if(playerTwo.choice === positions[0] && PlayerTwo.choice === positions[1] && PlayerTwo.choice === positions[2] || 
-        playerTwo.choice === positions[0] && playerTwo.choice === positions[4] && playerTwo.choice === positions[8] || 
-        playerTwo.choice === positions[0] && playerTwo.choice === positions[3] && playerTwo.choice === positions[6] || 
-        playerTwo.choice === positions[1] && playerTwo.choice === positions[4] && playerTwo.choice === positions[7] || 
-        playerTwo.choice === positions[2] && playerTwo.choice === positions[4] && playerTwo.choice === positions[6] || 
-        playerTwo.choice === positions[2] && playerTwo.choice === positions[5] && playerTwo.choice === positions[8] || 
-        playerTwo.choice === positions[3] && playerTwo.choice === positions[4] && playerTwo.choice === positions[5] || 
-        playerTwo.choice === positions[6] && playerTwo.choice === positions[7] && playerTwo.choice === positions[8]) {
+      } else if(Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[1] && Players.playerTwo.choice === Gameboard.positions[2] || 
+        Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[8] || 
+        Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[3] && Players.playerTwo.choice === Gameboard.positions[6] || 
+        Players.playerTwo.choice === Gameboard.positions[1] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[7] || 
+        Players.playerTwo.choice === Gameboard.positions[2] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[6] || 
+        Players.playerTwo.choice === Gameboard.positions[2] && Players.playerTwo.choice === Gameboard.positions[5] && Players.playerTwo.choice === Gameboard.positions[8] || 
+        Players.playerTwo.choice === Gameboard.positions[3] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[5] || 
+        Players.playerTwo.choice === Gameboard.positions[6] && Players.playerTwo.choice === Gameboard.positions[7] && Players.playerTwo.choice === Gameboard.positions[8]) {
         console.log('you lose');
       }
     }
