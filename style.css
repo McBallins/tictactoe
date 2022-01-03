@@ -30,7 +30,7 @@ footer,header,hgroup,menu,nav,section {
 nav ul {
     list-style:none;
 }
-
+>div.column*3
 blockquote, q {
     quotes:none;
 }
@@ -87,4 +87,28 @@ hr {
 
 input, select {
     vertical-align:middle;
+}
+
+#gameboard {
+    height: 96vh;
+    width: 96vh;
+    margin: auto;
+    margin-top: 2vh;
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.row {
+    flex-grow: 1;
+    flex-basis: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.column {
+    flex-grow: 1;
+    flex-basis: 1;
+    box-sizing: border-box;
+    border: 1px solid black;
 }
