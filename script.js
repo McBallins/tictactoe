@@ -56,7 +56,6 @@ const players = (() => {
     let choice = choice;
   }
 
-  const playerOne = Player(true, 'x');
-
-  const playerTwo = Player(false, 'o');
+  let playerOne = Player(true, 'x');
+  let playerTwo = Player(false, 'o');
 })();
