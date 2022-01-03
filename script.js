@@ -106,3 +106,17 @@ const Players = (function() {
   }
 
 })();
+
+const InfoBoard = (() => {
+  // forms to take in player names and x or o selection
+    // player selects player v player or player v ai
+  // write events that happen in the game
+    // win/lose/tie
+    // what happens in the game
+      // what player places what where
+  // reset button
+})();
+
+const aiPlayer = (() => {
+  
+})();
