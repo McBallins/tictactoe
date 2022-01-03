@@ -102,13 +102,13 @@ input, select {
 
 .row {
     flex-grow: 1;
-    flex-basis: 1;
+    flex-basis: 0;
     display: flex;
 }
 
 .column {
     flex-grow: 1;
-    flex-basis: 1;
+    flex-basis: 0;
     box-sizing: border-box;
     border: 1px solid black;
 }

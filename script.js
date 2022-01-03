@@ -13,14 +13,16 @@ const Gameboard = {
     })
   })(),
 
-  placeInPosition: function() {
-    if(Gameboard.positions[location] === undefined) {
-    Gameboard.positions[location] = player;
-    console.log(player + ' has been placed on ' + location);
-    const placement = document.querySelector(`[data-location=’${location}’]`);
-    placement.textContent = player;
+  placeInPosition: function(symbol, selectedPositon) {
+    if(Gameboard.positions[selectedPositon] === undefined) {
+    Gameboard.positions[selectedPositon] = symbol;
+    console.log(symbol + ' has been placed on ' + selectedPositon);
+    console.log((`[data-location=’${selectedPositon}’]`));
+    const placement = document.querySelector(`[data-location="${selectedPositon}"]`);
+    console.log(placement);
+    placement.textContent = symbol;
     } else {
-      console.log(`There is a ${this.positions[location]} already there!` );
+      console.log(`There is a ${this.positions[selectedPositon]} already there!` );
     }
   },
   // we have 9 lactations
