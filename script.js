@@ -11,7 +11,6 @@ const Game = (() => {
       InfoBoard.print(`It is ${Players.playerOne.name}'s turn.`)
     }
   }
-    //this is broken
     const checkEndofGame = () => {
       if(Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[1] && Players.playerOne.choice === Gameboard.positions[2] || 
         Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[8] || 
@@ -103,9 +102,11 @@ const InfoBoard = (() => {
 
   const makeForms = (() => {
     const myForms = [
+      ['', '', 'P', 'Player one name'],
       ['TEXT', 'playeronename', 'INPUT', ''],
+      ['', '', 'P', 'Player two name'],
       ['TEXT', 'playertwoname', 'INPUT', ''],
-      ['', '', 'P', 'Which Player is Going first?'],
+      ['', '', 'P', 'Which player is going first?'],
       ['RADIO', 'radioplayer', 'INPUT', 'Player One'],
       ['RADIO', 'radioplayer', 'INPUT', 'Player Two'],
       ['', 'submit', 'BUTTON', 'Begin Game'],
@@ -153,13 +154,6 @@ const InfoBoard = (() => {
     deleteForms: deleteForms,
     print: print,
   }
-  // forms to take in player names and x or o selection
-    // player selects player v player or player v ai
-  // write events that happen in the game
-    // win/lose/tie
-    // what happens in the game
-      // what player places what where
-  // reset button
 })();
 
 const aiPlayer = (() => {
@@ -211,3 +205,7 @@ const Gameboard = (() => {
     positions : positions
   };
 })();
+
+  // ai
+  // reset button
+  // pvp/pve button
