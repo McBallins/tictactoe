@@ -12,8 +12,6 @@ const Game = (() => {
       console.log(Players.playerOne.choice);
     }
   }
-
-
     //this is broken
     const checkEndofGame = () => {
       console.log('checking end of game');
@@ -88,6 +86,7 @@ const Players = (function() {
 })();
 
 const InfoBoard = (() => {
+
   const infoBoard = document.getElementById('infoboard');
 
   const makeForms = (() => {
@@ -119,6 +118,16 @@ const InfoBoard = (() => {
       i += 1;
     }));
   })();
+
+  const deleteForms = () => {
+    while (infoBoard.lastChild) {
+      infoBoard.removeChild(infoBoard.lastChild);
+  }
+  }
+
+  return {
+    deleteForms: deleteForms
+  }
   // forms to take in player names and x or o selection
     // player selects player v player or player v ai
   // write events that happen in the game
@@ -146,9 +155,9 @@ const Gameboard = (() => {
     const submitButton = document.getElementById('submit');
     submitButton.addEventListener('click', event =>{
       Players.getUserData();
+      InfoBoard.deleteForms();
     })
   })();
-
 
   const placeInPosition = function(location) {
 
