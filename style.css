@@ -131,3 +131,15 @@ input, select {
     flex-basis: 1;
     margin-right: 8vh;
 }
+
+#absolute {
+    position: absolute;
+    font-size: 35vh;
+    margin: auto;
+    text-align: center;
+    left: 10vw;
+    right: 10vw;
+    top: 50%;
+    margin-top: -15vh;
+    color: green;
+}

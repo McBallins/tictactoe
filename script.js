@@ -21,11 +21,12 @@ const Game = (() => {
         Players.playerOne.choice === Gameboard.positions[2] && Players.playerOne.choice === Gameboard.positions[5] && Players.playerOne.choice === Gameboard.positions[8] || 
         Players.playerOne.choice === Gameboard.positions[3] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[5] || 
         Players.playerOne.choice === Gameboard.positions[6] && Players.playerOne.choice === Gameboard.positions[7] && Players.playerOne.choice === Gameboard.positions[8]) {
-        InfoBoard.print(`${Players.playerOne.name} wins!`);
+        Players.playerOne.winner = true;
+        return true;
       }
       else if(Gameboard.positions[0] !== undefined && Gameboard.positions[1] !== undefined && Gameboard.positions[2] !== undefined && Gameboard.positions[3] !== undefined 
         && Gameboard.positions[5] !== undefined && Gameboard.positions[6] !== undefined && Gameboard.positions[7] !== undefined && Gameboard.positions[8] !== undefined) {
-        InfoBoard.print('The game ends in a tie!');
+        return true;
       } else if(Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[1] && Players.playerTwo.choice === Gameboard.positions[2] || 
         Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[8] || 
         Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[3] && Players.playerTwo.choice === Gameboard.positions[6] || 
@@ -34,13 +35,27 @@ const Game = (() => {
         Players.playerTwo.choice === Gameboard.positions[2] && Players.playerTwo.choice === Gameboard.positions[5] && Players.playerTwo.choice === Gameboard.positions[8] || 
         Players.playerTwo.choice === Gameboard.positions[3] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[5] || 
         Players.playerTwo.choice === Gameboard.positions[6] && Players.playerTwo.choice === Gameboard.positions[7] && Players.playerTwo.choice === Gameboard.positions[8]) {
-        InfoBoard.print(`${Players.playerTwo.name} wins!`);
+        Players.playerTwo.winner = true;
+        return true;
       }
     }
 
-      return {
-        switchTurn : switchTurn,
-        checkEndofGame : checkEndofGame
+    const endGame = function() {
+      if(Players.playerOne.winner === true) {
+        InfoBoard.print(`${Players.playerOne.name} wins!`, true);
+      } else if(Players.playerTwo.winner === true) {
+        InfoBoard.print(`${Players.playerTwo.name} wins!`, true);
+      } else {
+        InfoBoard.print('The game ends in a tie!', true);
+      };
+      // disable continued play
+      // make a new game button
+    }
+    
+    return {
+      switchTurn : switchTurn,
+      checkEndofGame : checkEndofGame,
+      endGame : endGame,
       }
 
 })();
@@ -114,9 +129,12 @@ const InfoBoard = (() => {
     }));
   })();
 
-  const print = (string) => {
+  const print = (string, absolute) => {
     const newParagraph = document.createElement('P');
     newParagraph.textContent = string;
+    if(absolute === true) {
+      newParagraph.id = 'absolute';
+    }
     infoBoard.appendChild(newParagraph);
   }
 
@@ -178,8 +196,11 @@ const Gameboard = (() => {
     console.log(choice + ' has been placed on ' + location);
     const position = document.querySelector(`[data-location="${location}"]`);
     position.textContent = choice;
-    Game.checkEndofGame();
+    if(Game.checkEndofGame() === true) {
+      Game.endGame();
+    } else {
     Game.switchTurn();
+    }
     } else {
       InfoBoard.print(`There is already a ${positions[location].toUpperCase()} there!`)
     };
