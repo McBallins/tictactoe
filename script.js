@@ -4,11 +4,11 @@ const Game = (() => {
     if(Players.playerOne.isCurrentPlayer) {
       Players.playerTwo.isCurrentPlayer = true;
       Players.playerOne.isCurrentPlayer = false;
-      InfoBoard.print(`It is ${Players.playerOne.name}'s turn.`);
+      InfoBoard.print(`It is ${Players.playerTwo.name}'s turn.`);
     } else {
       Players.playerOne.isCurrentPlayer = true;
       Players.playerTwo.isCurrentPlayer = false;
-      InfoBoard.print(`It is ${Players.playerTwo.name}'s turn.`)
+      InfoBoard.print(`It is ${Players.playerOne.name}'s turn.`)
     }
   }
     //this is broken
