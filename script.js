@@ -1,20 +1,18 @@
 const Game = (() => {
 
   const switchTurn = function() {
-    console.log('switching turns')
     if(Players.playerOne.isCurrentPlayer) {
       Players.playerTwo.isCurrentPlayer = true;
       Players.playerOne.isCurrentPlayer = false;
-      console.log(Players.playerTwo.choice);
+      InfoBoard.print(`It is ${Players.playerOne.name}'s turn.`);
     } else {
       Players.playerOne.isCurrentPlayer = true;
       Players.playerTwo.isCurrentPlayer = false;
-      console.log(Players.playerOne.choice);
+      InfoBoard.print(`It is ${Players.playerTwo.name}'s turn.`)
     }
   }
     //this is broken
     const checkEndofGame = () => {
-      console.log('checking end of game');
       if(Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[1] && Players.playerOne.choice === Gameboard.positions[2] || 
         Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[8] || 
         Players.playerOne.choice === Gameboard.positions[0] && Players.playerOne.choice === Gameboard.positions[3] && Players.playerOne.choice === Gameboard.positions[6] || 
@@ -23,12 +21,11 @@ const Game = (() => {
         Players.playerOne.choice === Gameboard.positions[2] && Players.playerOne.choice === Gameboard.positions[5] && Players.playerOne.choice === Gameboard.positions[8] || 
         Players.playerOne.choice === Gameboard.positions[3] && Players.playerOne.choice === Gameboard.positions[4] && Players.playerOne.choice === Gameboard.positions[5] || 
         Players.playerOne.choice === Gameboard.positions[6] && Players.playerOne.choice === Gameboard.positions[7] && Players.playerOne.choice === Gameboard.positions[8]) {
-        console.log('you win');
+        InfoBoard.print(`${Players.playerOne.name} wins!`);
       }
       else if(Gameboard.positions[0] !== undefined && Gameboard.positions[1] !== undefined && Gameboard.positions[2] !== undefined && Gameboard.positions[3] !== undefined 
         && Gameboard.positions[5] !== undefined && Gameboard.positions[6] !== undefined && Gameboard.positions[7] !== undefined && Gameboard.positions[8] !== undefined) {
-        console.log(Gameboard.positions.length)
-        console.log('you tied');
+        InfoBoard.print('The game ends in a tie!');
       } else if(Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[1] && Players.playerTwo.choice === Gameboard.positions[2] || 
         Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[8] || 
         Players.playerTwo.choice === Gameboard.positions[0] && Players.playerTwo.choice === Gameboard.positions[3] && Players.playerTwo.choice === Gameboard.positions[6] || 
@@ -37,7 +34,7 @@ const Game = (() => {
         Players.playerTwo.choice === Gameboard.positions[2] && Players.playerTwo.choice === Gameboard.positions[5] && Players.playerTwo.choice === Gameboard.positions[8] || 
         Players.playerTwo.choice === Gameboard.positions[3] && Players.playerTwo.choice === Gameboard.positions[4] && Players.playerTwo.choice === Gameboard.positions[5] || 
         Players.playerTwo.choice === Gameboard.positions[6] && Players.playerTwo.choice === Gameboard.positions[7] && Players.playerTwo.choice === Gameboard.positions[8]) {
-        console.log('you lose');
+        InfoBoard.print(`${Players.playerTwo.name} wins!`);
       }
     }
 
@@ -61,10 +58,10 @@ const Players = (function() {
   const getUserData = () => {
     const playerOneName = document.getElementById('playeronename');
     const playerTwoName = document.getElementById('playertwoname');
-    xAssignment = document.getElementById('radioplayerone');
+    xAssignment = document.getElementById('radioplayer');
     playerOne.name = playerOneName.value;
     playerTwo.name = playerTwoName.value;
-    if(xAssignment.value === 'Player One') {
+    if(xAssignment.checked === true) {
       playerOne.choice = 'x';
       playerTwo.choice = 'o'
       playerOne.isCurrentPlayer = true;
@@ -94,14 +91,13 @@ const InfoBoard = (() => {
       ['TEXT', 'playeronename', 'INPUT', ''],
       ['TEXT', 'playertwoname', 'INPUT', ''],
       ['', '', 'P', 'Which Player is Going first?'],
-      ['RADIO', 'radioplayerone', 'INPUT', 'Player One'],
-      ['RADIO', 'radioplayertwo', 'INPUT', 'Player Two'],
+      ['RADIO', 'radioplayer', 'INPUT', 'Player One'],
+      ['RADIO', 'radioplayer', 'INPUT', 'Player Two'],
       ['', 'submit', 'BUTTON', 'Begin Game'],
     ]
     let i = 0;
     myForms.forEach((form => {
       const newForm = document.createElement(myForms[i][2]);
-      console.log(myForms[i]);
       newForm.classList = 'form';
       newForm.type = myForms[i][0];
       newForm.id = myForms[i][1];
@@ -109,7 +105,6 @@ const InfoBoard = (() => {
       newForm.value = myForms[i][3];
       newForm.textContent = myForms[i][3];
       if(myForms[i][0] === 'RADIO') {
-        console.log('works')
         const label = document.createElement('LABEL');
         label.textContent = myForms[i][3];
         infoBoard.appendChild(label);
@@ -119,14 +114,26 @@ const InfoBoard = (() => {
     }));
   })();
 
+  const print = (string) => {
+    const newParagraph = document.createElement('P');
+    newParagraph.textContent = string;
+    infoBoard.appendChild(newParagraph);
+  }
+
   const deleteForms = () => {
     while (infoBoard.lastChild) {
       infoBoard.removeChild(infoBoard.lastChild);
-  }
+    }
+    if(Players.playerOne.isCurrentPlayer) {
+      print(Players.playerOne.name + ' will start.');
+    } else {
+      print(Players.playerTwo.name + ' will start.');
+    }
   }
 
   return {
-    deleteForms: deleteForms
+    deleteForms: deleteForms,
+    print: print,
   }
   // forms to take in player names and x or o selection
     // player selects player v player or player v ai
@@ -161,8 +168,6 @@ const Gameboard = (() => {
 
   const placeInPosition = function(location) {
 
-    let symbol;
-    console.log(Players.playerOne.isCurrentPlayer)
     if(Players.playerOne.isCurrentPlayer) {
       choice = Players.playerOne.choice
     } else {
@@ -176,7 +181,7 @@ const Gameboard = (() => {
     Game.checkEndofGame();
     Game.switchTurn();
     } else {
-      console.log(`There is a ${this.positions[location]} already there!` );
+      InfoBoard.print(`There is already a ${positions[location].toUpperCase()} there!`)
     };
   };
 
